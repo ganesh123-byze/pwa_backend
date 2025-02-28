@@ -9,7 +9,7 @@ import requests
 # ✅ Initialize FastAPI app
 app = FastAPI()
 
-# ✅ Enable CORS
+# ✅ Enable CORS (Allows frontend requests)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -74,5 +74,5 @@ async def analyze(
     return {"message": " | ".join(response_message)}
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 10000))  # ✅ Use Render's dynamic port
+    port = int(os.environ.get("PORT", 8000))  # ✅ Use Render's dynamic port
     uvicorn.run(app, host="0.0.0.0", port=port)
