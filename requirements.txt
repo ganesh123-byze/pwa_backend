@@ -1,5 +1,5 @@
 fastapi
 uvicorn
-pydantic
-python-multipart  # Required for handling file uploads
-aiofiles  # Required for saving uploaded files
+requests
+python-multipart
+aiofiles
