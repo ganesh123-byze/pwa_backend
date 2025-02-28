@@ -4,6 +4,7 @@ import uvicorn
 import os
 import shutil
 
+# ✅ Initialize FastAPI app
 app = FastAPI()
 
 # ✅ Enable CORS
@@ -17,6 +18,11 @@ app.add_middleware(
 
 # ✅ Ensure 'uploads' directory exists
 os.makedirs("uploads", exist_ok=True)
+
+# ✅ Root endpoint to prevent 404 error
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the AI-powered Offensive Language Detection API!"}
 
 @app.post("/analyze")
 async def analyze(
@@ -52,4 +58,5 @@ async def analyze(
     return {"message": " | ".join(response_message)}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)
+    port = int(os.getenv("PORT", 10000))  # ✅ Use Render's dynamic port
+    uvicorn.run(app, host="0.0.0.0", port=port)
